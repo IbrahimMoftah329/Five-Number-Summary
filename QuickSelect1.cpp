@@ -1,0 +1,98 @@
+/*
+CSCI335 Spring 2024
+Project 3
+Ibrahim Moftah
+*/
+
+#include "QuickSelect1.hpp"
+
+// Function to perform the Quickselect algorithm
+int quickselect3(std::vector<int>& data, int left, int right, int k) {
+    if (left == right) {
+        return data[left];
+    }
+
+    // If the range is small, switch to insertion sort
+    if (right - left <= 20) {
+        for (int i = left + 1; i <= right; ++i) {
+            int key = data[i];
+            int j = i - 1;
+            while (j >= left && data[j] > key) {
+                data[j + 1] = data[j];
+                j--;
+            }
+            data[j + 1] = key;
+        }
+        return data[left + k];
+    }
+
+    int pivotIndex = left + rand() % (right - left + 1);
+    int pivotValue = data[pivotIndex];
+    std::swap(data[pivotIndex], data[right]);
+    int storeIndex = left;
+    for (int i = left; i < right; ++i) {
+        if (data[i] < pivotValue) {
+            std::swap(data[i], data[storeIndex]);
+            storeIndex++;
+        }
+    }
+    std::swap(data[storeIndex], data[right]);
+
+    if (k == storeIndex - left) {
+        return data[storeIndex];
+    } else if (k < storeIndex - left) {
+        return quickselect3(data, left, storeIndex - 1, k);
+    } else {
+        return quickselect3(data, storeIndex + 1, right, k - (storeIndex - left) - 1);
+    }
+}
+
+void quickSelect1(const std::string& header, std::vector<int> data) {
+    std::vector<int> data_copy = data; // Make a copy of the data
+
+    // Calculate the position for the median (P50)
+    int size = data_copy.size();
+    int pos50 = static_cast<int>(0.5 * (size - 1));
+
+    // Timing the process
+    auto t1_start = std::chrono::steady_clock::now();
+
+    // Find the median (P50)
+    int median = quickselect3(data_copy, 0, size - 1, pos50);
+
+    // Calculate the positions for the 25th and 75th percentiles
+    int pos25 = static_cast<int>(0.25 * size);
+    int pos75 = static_cast<int>(0.75 * (size - 1));
+
+    // Calculate P25 and P75 using Quickselect on the appropriate halves
+    int p25 = quickselect3(data_copy, 0, pos50 - 1, pos25 - 1);
+    int p75 = quickselect3(data_copy, pos50 + 1, size - 1, pos75 - pos50 - 1);
+
+    // Find min and max in the sections below P25 and above P75
+    int min = data_copy[0];
+    int max = data_copy[0];
+
+    for (int i = 0; i < pos25; ++i) {
+        if (data_copy[i] < min) {
+            min = data_copy[i];
+        }
+    }
+
+    for (size_t i = pos75; i < data_copy.size(); ++i) {
+        if (data_copy[i] > max) {
+            max = data_copy[i];
+        }
+    }
+
+    auto t1_end = std::chrono::steady_clock::now();
+    int t1 = std::chrono::duration<double, std::micro>(t1_end - t1_start).count();
+    std::cout << "Quickselect method completed in " << t1 << " microseconds." << std::endl;
+
+    // Print the percentiles
+    std::cout << header << std::endl;
+    std::cout << "Min: " << min << std::endl;
+    std::cout << "P25: " << p25 << std::endl;
+    std::cout << "P50: " << median << std::endl;
+    std::cout << "P75: " << p75 << std::endl;
+    std::cout << "Max: " << max << std::endl;
+}
