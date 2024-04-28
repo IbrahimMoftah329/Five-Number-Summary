@@ -14,6 +14,7 @@ Ibrahim Moftah
 #include <cmath>
 #include <chrono>
 
+// Function to calculate percentiles using counting sort
 void countingSort(const std::string & header, std::vector<int> data);
 
 #endif

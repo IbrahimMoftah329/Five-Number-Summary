@@ -12,6 +12,10 @@ Ibrahim Moftah
 #include <algorithm>
 #include <chrono>
 
+// Function to calculate percentiles using Quickselect
 void quickSelect1(const std::string & header, std::vector<int> data);
+
+// Function to perform the Quickselect algorithm
+int quickselectFunction(std::vector<int>& data, int left, int right, int k);
 
 #endif

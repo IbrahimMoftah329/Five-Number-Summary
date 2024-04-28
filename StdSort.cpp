@@ -6,6 +6,7 @@ Ibrahim Moftah
 
 #include "StdSort.hpp"
 
+// Function to calculate percentiles using std::sort
 void stdSort(const std::string & header, std::vector<int> data) {
     // Timing the process
     const auto t1_start = std::chrono::steady_clock::now();

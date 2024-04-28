@@ -6,7 +6,7 @@ Ibrahim Moftah
 
 #include "CountingSort.hpp"
 
-// Function to calculate percentiles
+// Function to calculate percentiles using counting sort
 void countingSort(const std::string & header, std::vector<int> data) {
     // Create a hash map to store counts of each unique data value
     std::unordered_map<int, int> hash;
@@ -41,9 +41,12 @@ void countingSort(const std::string & header, std::vector<int> data) {
     int p50Index = dataSize / 2;
     int p75Index = (3 * dataSize) / 4;
 
+    // Initialize variables to store quartile values
     int min = counts.front().first;
     int max = counts.back().first;
     int p25 = 0, median = 0, p75 = 0;
+
+    // Find quartile values based on cumulative counts
     for (const auto& pair : counts) {
         if (pair.second >= p25Index && p25 == 0) {
             p25 = pair.first;
@@ -56,11 +59,12 @@ void countingSort(const std::string & header, std::vector<int> data) {
         }
     }
 
+    // Measure the time taken for sorting and calculations
     auto t1_end = std::chrono::steady_clock::now();
     int t1 = std::chrono::duration<double, std::micro>(t1_end - t1_start).count();
     std::cout << "Counting sort method completed in " << t1 << " microseconds." << std::endl;
 
-    // Print the percentiles
+    // Print the percentiles and number of unique elements
     std::cout << header << std::endl;
     std::cout << "Min: " << min << std::endl;
     std::cout << "P25: " << p25 << std::endl;
