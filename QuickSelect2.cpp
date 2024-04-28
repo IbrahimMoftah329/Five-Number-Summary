@@ -7,29 +7,36 @@ Ibrahim Moftah
 #include "QuickSelect2.hpp"
 
 // Function to perform the Quickselect algorithm
-void quickselect4(std::vector<int>& data, int left, int right, std::set<int>& keys) {
+void quickselectFunction(std::vector<int>& data, int left, int right, std::set<int>& keys) {
+    // Base case: If the range is invalid or empty, return
     if (left >= right) {
         return;
     }
 
     // If the range is small, switch to insertion sort
     if (right - left <= 20) {
+        // Insertion sort
         for (int i = left + 1; i <= right; ++i) {
             int key = data[i];
             int j = i - 1;
+            // Move elements greater than key to the right
             while (j >= left && data[j] > key) {
                 data[j + 1] = data[j];
                 j--;
             }
+            // Insert key into correct position
             data[j + 1] = key;
         }
         return;
     }
 
+    // Choose pivot randomly
     int pivotIndex = left + rand() % (right - left + 1);
     int pivotValue = data[pivotIndex];
+    // Move pivot to the end
     std::swap(data[pivotIndex], data[right]);
     int storeIndex = left;
+    // Partition the array around the pivot
     for (int i = left; i < right; ++i) {
         if (data[i] < pivotValue) {
             std::swap(data[i], data[storeIndex]);
@@ -42,15 +49,17 @@ void quickselect4(std::vector<int>& data, int left, int right, std::set<int>& ke
     std::set<int> leftKeys, rightKeys;
     for (int key : keys) {
         if (key < storeIndex - left) {
+            // Key belongs to the left side
             leftKeys.insert(key);
         } else if (key > storeIndex - left) {
+            // Key belongs to the right side
             rightKeys.insert(key - (storeIndex - left) - 1);
         }
     }
 
     // Recurse on the appropriate sides
-    quickselect4(data, left, storeIndex - 1, leftKeys);
-    quickselect4(data, storeIndex + 1, right, rightKeys);
+    quickselectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
+    quickselectFunction(data, storeIndex + 1, right, rightKeys); // Right side
 }
 
 void quickSelect2(const std::string & header, std::vector<int> data) {
@@ -64,7 +73,7 @@ void quickSelect2(const std::string & header, std::vector<int> data) {
     auto t1_start = std::chrono::steady_clock::now();
 
     // Perform the modified quickselect
-    quickselect4(data_copy, 0, size - 1, keys);
+    quickselectFunction(data_copy, 0, size - 1, keys);
 
     // Extract the values at the keys
     std::vector<int> results;

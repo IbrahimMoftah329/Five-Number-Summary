@@ -7,29 +7,37 @@ Ibrahim Moftah
 #include "QuickSelect1.hpp"
 
 // Function to perform the Quickselect algorithm
-int quickselect3(std::vector<int>& data, int left, int right, int k) {
+int quickselectFunction(std::vector<int>& data, int left, int right, int k) {
+    // Base case: If the range contains only one element, return it
     if (left == right) {
         return data[left];
     }
 
     // If the range is small, switch to insertion sort
     if (right - left <= 20) {
+        // Insertion sort
         for (int i = left + 1; i <= right; ++i) {
             int key = data[i];
             int j = i - 1;
+            // Move elements greater than key to the right
             while (j >= left && data[j] > key) {
                 data[j + 1] = data[j];
                 j--;
             }
+            // Insert key into correct position
             data[j + 1] = key;
         }
+        // Return the kth element
         return data[left + k];
     }
 
+    // Choose pivot randomly
     int pivotIndex = left + rand() % (right - left + 1);
     int pivotValue = data[pivotIndex];
+    // Move pivot to the end
     std::swap(data[pivotIndex], data[right]);
     int storeIndex = left;
+    // Partition the array around the pivot
     for (int i = left; i < right; ++i) {
         if (data[i] < pivotValue) {
             std::swap(data[i], data[storeIndex]);
@@ -38,12 +46,13 @@ int quickselect3(std::vector<int>& data, int left, int right, int k) {
     }
     std::swap(data[storeIndex], data[right]);
 
+    // Check if the pivot is the kth element
     if (k == storeIndex - left) {
         return data[storeIndex];
-    } else if (k < storeIndex - left) {
-        return quickselect3(data, left, storeIndex - 1, k);
-    } else {
-        return quickselect3(data, storeIndex + 1, right, k - (storeIndex - left) - 1);
+    } else if (k < storeIndex - left) { // Recurse on the left side
+        return quickselectFunction(data, left, storeIndex - 1, k);
+    } else { // Recurse on the right side
+        return quickselectFunction(data, storeIndex + 1, right, k - (storeIndex - left) - 1);
     }
 }
 
@@ -58,26 +67,28 @@ void quickSelect1(const std::string& header, std::vector<int> data) {
     auto t1_start = std::chrono::steady_clock::now();
 
     // Find the median (P50)
-    int median = quickselect3(data_copy, 0, size - 1, pos50);
+    int median = quickselectFunction(data_copy, 0, size - 1, pos50);
 
     // Calculate the positions for the 25th and 75th percentiles
     int pos25 = static_cast<int>(0.25 * size);
     int pos75 = static_cast<int>(0.75 * (size - 1));
 
     // Calculate P25 and P75 using Quickselect on the appropriate halves
-    int p25 = quickselect3(data_copy, 0, pos50 - 1, pos25 - 1);
-    int p75 = quickselect3(data_copy, pos50 + 1, size - 1, pos75 - pos50 - 1);
+    int p25 = quickselectFunction(data_copy, 0, pos50 - 1, pos25 - 1);
+    int p75 = quickselectFunction(data_copy, pos50 + 1, size - 1, pos75 - pos50 - 1);
 
     // Find min and max in the sections below P25 and above P75
     int min = data_copy[0];
     int max = data_copy[0];
 
+    // Find min
     for (int i = 0; i < pos25; ++i) {
         if (data_copy[i] < min) {
             min = data_copy[i];
         }
     }
 
+    // Find max
     for (size_t i = pos75; i < data_copy.size(); ++i) {
         if (data_copy[i] > max) {
             max = data_copy[i];
