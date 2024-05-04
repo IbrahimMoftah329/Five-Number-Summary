@@ -7,7 +7,7 @@ Ibrahim Moftah
 #include "QuickSelect2.hpp"
 
 // Function to perform the Quickselect algorithm
-void quickselectFunction(std::vector<int>& data, int left, int right, std::set<int>& keys) {
+void quickSelectFunction(std::vector<int>& data, int left, int right, std::set<int>& keys) {
     // Base case: If the range is invalid or empty, return
     if (left >= right) {
         return;
@@ -58,23 +58,23 @@ void quickselectFunction(std::vector<int>& data, int left, int right, std::set<i
     }
 
     // Recurse on the appropriate sides
-    quickselectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
-    quickselectFunction(data, storeIndex + 1, right, rightKeys); // Right side
+    quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
+    quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
 }
 
 // Function to calculate percentiles using Quickselect
 void quickSelect2(const std::string & header, std::vector<int> data) {
     std::vector<int> data_copy = data; // Make a copy of the data
 
+    // Timing the process
+    auto t1_start = std::chrono::steady_clock::now();
+
     // Calculate the positions for the keys
     int size = data_copy.size();
     std::set<int> keys = {0, static_cast<int>(0.25 * (size - 1)), static_cast<int>(0.5 * (size - 1)), static_cast<int>(0.75 * (size - 1)), size - 1};
 
-    // Timing the process
-    auto t1_start = std::chrono::steady_clock::now();
-
     // Perform the modified quickselect
-    quickselectFunction(data_copy, 0, size - 1, keys);
+    quickSelectFunction(data_copy, 0, size - 1, keys);
 
     // Extract the values at the keys
     std::vector<int> results;

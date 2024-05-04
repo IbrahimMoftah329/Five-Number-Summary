@@ -18,6 +18,6 @@ Ibrahim Moftah
 void quickSelect2(const std::string & header, std::vector<int> data);
 
 // Function to perform the Quickselect algorithm
-void quickselectFunction(std::vector<int>& data, int left, int right, std::set<int>& keys);
+void quickSelectFunction(std::vector<int>& data, int left, int right, std::set<int>& keys);
 
 #endif
