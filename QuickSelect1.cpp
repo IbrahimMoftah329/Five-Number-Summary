@@ -50,9 +50,9 @@ int quickSelectFunction(std::vector<int>& data, int left, int right, int k) {
     if (k == storeIndex - left) {
         return data[storeIndex];
     } else if (k < storeIndex - left) { // Recurse on the left side
-        return quickselectFunction(data, left, storeIndex - 1, k);
+        return quickSelectFunction(data, left, storeIndex - 1, k);
     } else { // Recurse on the right side
-        return quickselectFunction(data, storeIndex + 1, right, k - (storeIndex - left) - 1);
+        return quickSelectFunction(data, storeIndex + 1, right, k - (storeIndex - left) - 1);
     }
 }
 
