@@ -57,9 +57,22 @@ void quickSelectFunction(std::vector<int>& data, int left, int right, std::set<i
         }
     }
 
-    // Recurse on the appropriate sides
-    quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
-    quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
+    // Check if keys are present on both sides
+    bool keysOnLeft = !leftKeys.empty();
+    bool keysOnRight = !rightKeys.empty();
+
+    // Recurse on the appropriate side(s)
+    if (keysOnLeft && keysOnRight) {
+        // If keys are present on both sides, recurse on both sides
+        quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
+        quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
+    } else if (keysOnLeft) {
+        // If keys are only present on the left side, recurse on the left side
+        quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
+    } else if (keysOnRight) {
+        // If keys are only present on the right side, recurse on the right side
+        quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
+    }
 }
 
 // Function to calculate percentiles using Quickselect
