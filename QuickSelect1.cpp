@@ -60,12 +60,12 @@ int quickselectFunction(std::vector<int>& data, int left, int right, int k) {
 void quickSelect1(const std::string& header, std::vector<int> data) {
     std::vector<int> data_copy = data; // Make a copy of the data
 
+    // Timing the process
+    auto t1_start = std::chrono::steady_clock::now();
+
     // Calculate the position for the median (P50)
     int size = data_copy.size();
     int pos50 = static_cast<int>(0.5 * (size - 1));
-
-    // Timing the process
-    auto t1_start = std::chrono::steady_clock::now();
 
     // Find the median (P50)
     int median = quickselectFunction(data_copy, 0, size - 1, pos50);
