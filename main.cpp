@@ -17,7 +17,7 @@ Ibrahim Moftah
 
 int main() {
     // Open input file
-    std::ifstream inputFile("test_input.txt");
+    std::ifstream inputFile("test_input3.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Error: Unable to open input file." << std::endl;
         return 1;
