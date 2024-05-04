@@ -36,10 +36,10 @@ void countingSort(const std::string & header, std::vector<int> data) {
     }
 
     // Calculate quartiles
-    int dataSize = data.size();
-    int p25Index = dataSize / 4;
-    int p50Index = dataSize / 2;
-    int p75Index = (3 * dataSize) / 4;
+    int size = data.size();
+    int p25Index = size / 4;
+    int p50Index = size / 2;
+    int p75Index = (3 * size) / 4;
 
     // Initialize variables to store quartile values
     int min = counts.front().first;
