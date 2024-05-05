@@ -58,41 +58,39 @@ int quickSelectFunction(std::vector<int>& data, int left, int right, int k) {
 
 // Function to calculate percentiles using Quickselect
 void quickSelect1(const std::string& header, std::vector<int> data) {
-    std::vector<int> data_copy = data; // Make a copy of the data
-
     // Timing the process
     auto t1_start = std::chrono::steady_clock::now();
 
     // Calculate the position for the median (P50)
-    int size = data_copy.size();
+    int size = data.size();
     int pos50 = static_cast<int>(0.5 * (size - 1));
 
     // Find the median (P50)
-    int median = quickSelectFunction(data_copy, 0, size - 1, pos50);
+    int median = quickSelectFunction(data, 0, size - 1, pos50);
 
     // Calculate the positions for the 25th and 75th percentiles
     int pos25 = static_cast<int>(0.25 * size);
     int pos75 = static_cast<int>(0.75 * (size - 1));
 
     // Calculate P25 and P75 using Quickselect on the appropriate halves
-    int p25 = quickSelectFunction(data_copy, 0, pos50 - 1, pos25 - 1);
-    int p75 = quickSelectFunction(data_copy, pos50 + 1, size - 1, pos75 - pos50 - 1);
+    int p25 = quickSelectFunction(data, 0, pos50 - 1, pos25 - 1);
+    int p75 = quickSelectFunction(data, pos50 + 1, size - 1, pos75 - pos50 - 1);
 
     // Find min and max in the sections below P25 and above P75
-    int min = data_copy[0];
-    int max = data_copy[0];
+    int min = data[0];
+    int max = data[0];
 
     // Find min
     for (int i = 0; i < pos25; ++i) {
-        if (data_copy[i] < min) {
-            min = data_copy[i];
+        if (data[i] < min) {
+            min = data[i];
         }
     }
 
     // Find max
-    for (size_t i = pos75; i < data_copy.size(); ++i) {
-        if (data_copy[i] > max) {
-            max = data_copy[i];
+    for (size_t i = pos75; i < data.size(); ++i) {
+        if (data[i] > max) {
+            max = data[i];
         }
     }
 
