@@ -29,7 +29,7 @@ void stdSort(const std::string & header, std::vector<int> data) {
 
     const auto t1_end = std::chrono::steady_clock::now();
     int t1 = std::chrono::duration <double, std::micro> (t1_end - t1_start).count();
-    std::cout << "std::sort method completed in " << t1 << " microseconds." << std::endl;
+    // std::cout << "std::sort method completed in " << t1 << " microseconds." << std::endl;
     
     // Print the percentiles
     std::cout << header << std::endl;

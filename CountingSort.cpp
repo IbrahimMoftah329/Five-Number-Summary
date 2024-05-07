@@ -62,7 +62,7 @@ void countingSort(const std::string & header, std::vector<int> data) {
     // Measure the time taken for sorting and calculations
     auto t1_end = std::chrono::steady_clock::now();
     int t1 = std::chrono::duration<double, std::micro>(t1_end - t1_start).count();
-    std::cout << "Counting sort method completed in " << t1 << " microseconds." << std::endl;
+    // std::cout << "Counting sort method completed in " << t1 << " microseconds." << std::endl;
 
     // Print the percentiles and number of unique elements
     std::cout << header << std::endl;
