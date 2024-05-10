@@ -14,17 +14,12 @@ void stdSort(const std::string & header, std::vector<int> data) {
     // Sort it
     std::sort(data.begin(), data.end());
     
-    // Calculate the positions for the 25th, 50th, and 75th percentiles
+    // Calculate the percentiles using the positions for the 25th, 50th, and 75th percentiles
     int size = data.size();
-    int pos25 = static_cast<int>(0.25 * (size - 1));
-    int pos50 = static_cast<int>(0.5 * (size - 1));
-    int pos75 = static_cast<int>(0.75 * (size - 1));
-
-    // Calculate the percentiles
     int min = data[0];
-    int p25 = data[pos25];
-    int median = data[pos50];
-    int p75 = data[pos75];
+    int p25 = data[static_cast<int>(0.25 * (size - 1))];
+    int median = data[static_cast<int>(0.5 * (size - 1))];
+    int p75 = data[static_cast<int>(0.75 * (size - 1))];
     int max = data[data.size() - 1];
 
     const auto t1_end = std::chrono::steady_clock::now();

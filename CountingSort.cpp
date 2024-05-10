@@ -21,8 +21,8 @@ void countingSort(const std::string & header, std::vector<int> data) {
 
     // Create a vector of pairs to store (value, count)
     std::vector<std::pair<int, int>> counts;
-    for (const auto& pair : hash) {
-        counts.emplace_back(pair.first, pair.second);
+    for (const auto& count : hash) {
+        counts.emplace_back(count.first, count.second);
     }
 
     // Sort the vector based on the value
@@ -30,9 +30,9 @@ void countingSort(const std::string & header, std::vector<int> data) {
 
     // Calculate cumulative counts for quartiles
     int total = 0;
-    for (auto& pair : counts) {
-        total += pair.second;
-        pair.second = total;
+    for (auto& count : counts) {
+        total += count.second;
+        count.second = total;
     }
 
     // Calculate quartiles
@@ -47,15 +47,15 @@ void countingSort(const std::string & header, std::vector<int> data) {
     int p25 = 0, median = 0, p75 = 0;
 
     // Find quartile values based on cumulative counts
-    for (const auto& pair : counts) {
-        if (pair.second >= p25Index && p25 == 0) {
-            p25 = pair.first;
+    for (const auto& count : counts) {
+        if (count.second >= p25Index && p25 == 0) {
+            p25 = count.first;
         }
-        if (pair.second >= p50Index && median == 0) {
-            median = pair.first;
+        if (count.second >= p50Index && median == 0) {
+            median = count.first;
         }
-        if (pair.second >= p75Index && p75 == 0) {
-            p75 = pair.first;
+        if (count.second >= p75Index && p75 == 0) {
+            p75 = count.first;
         }
     }
 

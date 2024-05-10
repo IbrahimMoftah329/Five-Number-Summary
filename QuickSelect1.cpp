@@ -61,16 +61,14 @@ void quickSelect1(const std::string& header, std::vector<int> data) {
     // Timing the process
     auto t1_start = std::chrono::steady_clock::now();
 
-    // Calculate the position for the median (P50)
+    // Calculate the positions for the median (P50), 25th, and 75th percentiles
     int size = data.size();
     int pos50 = static_cast<int>(0.5 * (size - 1));
+    int pos25 = static_cast<int>(0.25 * size);
+    int pos75 = static_cast<int>(0.75 * (size - 1));
 
     // Find the median (P50)
     int median = quickSelectFunction(data, 0, size - 1, pos50);
-
-    // Calculate the positions for the 25th and 75th percentiles
-    int pos25 = static_cast<int>(0.25 * size);
-    int pos75 = static_cast<int>(0.75 * (size - 1));
 
     // Calculate P25 and P75 using Quickselect on the appropriate halves
     int p25 = quickSelectFunction(data, 0, pos50 - 1, pos25 - 1);
