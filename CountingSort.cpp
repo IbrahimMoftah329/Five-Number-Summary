@@ -44,7 +44,9 @@ void countingSort(const std::string & header, std::vector<int> data) {
     // Initialize variables to store quartile values
     int min = counts.front().first;
     int max = counts.back().first;
-    int p25 = 0, median = 0, p75 = 0;
+    int p25 = 0;
+    int median = 0; 
+    int p75 = 0;
 
     // Find quartile values based on cumulative counts
     for (const auto& count : counts) {

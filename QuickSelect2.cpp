@@ -57,19 +57,15 @@ void quickSelectFunction(std::vector<int>& data, int left, int right, std::set<i
         }
     }
 
-    // Check if keys are present on both sides
-    bool keysOnLeft = !leftKeys.empty();
-    bool keysOnRight = !rightKeys.empty();
-
     // Recurse on the appropriate side(s)
-    if (keysOnLeft && keysOnRight) {
+    if (!leftKeys.empty() && !rightKeys.empty()) {
         // If keys are present on both sides, recurse on both sides
         quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
         quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
-    } else if (keysOnLeft) {
+    } else if (!leftKeys.empty()) {
         // If keys are only present on the left side, recurse on the left side
         quickSelectFunction(data, left, storeIndex - 1, leftKeys);   // Left side
-    } else if (keysOnRight) {
+    } else if (!rightKeys.empty()) {
         // If keys are only present on the right side, recurse on the right side
         quickSelectFunction(data, storeIndex + 1, right, rightKeys); // Right side
     }
@@ -82,7 +78,7 @@ void quickSelect2(const std::string & header, std::vector<int> data) {
 
     // Calculate the positions for the keys
     int size = data.size();
-    std::set<int> keys = {0, static_cast<int>(0.25 * (size - 1)), static_cast<int>(0.5 * (size - 1)), static_cast<int>(0.75 * (size - 1)), size - 1};
+    std::set<int> keys = {0, (size - 1) / 4, (size - 1) / 2, 3 * (size - 1) / 4, size - 1};
 
     // Perform the modified quickselect
     quickSelectFunction(data, 0, size - 1, keys);

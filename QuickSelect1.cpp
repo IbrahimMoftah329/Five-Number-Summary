@@ -63,9 +63,9 @@ void quickSelect1(const std::string& header, std::vector<int> data) {
 
     // Calculate the positions for the median (P50), 25th, and 75th percentiles
     int size = data.size();
-    int pos50 = static_cast<int>(0.5 * (size - 1));
-    int pos25 = static_cast<int>(0.25 * size);
-    int pos75 = static_cast<int>(0.75 * (size - 1));
+    int pos50 = (size - 1) / 2;
+    int pos25 = (size) / 4;
+    int pos75 = 3 * (size - 1) / 4;
 
     // Find the median (P50)
     int median = quickSelectFunction(data, 0, size - 1, pos50);
