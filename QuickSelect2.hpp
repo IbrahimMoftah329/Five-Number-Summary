@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #ifndef QUICKSELECTRECURSE_HPP
 #define QUICKSELECTRECURSE_HPP
 
