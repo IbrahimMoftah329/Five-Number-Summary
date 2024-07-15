@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #ifndef QUICKSELECT_HPP
 #define QUICKSELECT_HPP
 
