@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #include "CountingSort.hpp"
 
 // Function to calculate percentiles using counting sort
