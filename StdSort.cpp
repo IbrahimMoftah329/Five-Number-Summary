@@ -1,9 +1,3 @@
-/*
-CSCI335 Spring 2024
-Project 3
-Ibrahim Moftah
-*/
-
 #include "StdSort.hpp"
 
 // Function to calculate percentiles using std::sort
