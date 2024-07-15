@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #include "StdSort.hpp"
 
 // Function to calculate percentiles using std::sort
