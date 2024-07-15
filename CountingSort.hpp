@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #ifndef COUNTINGSORT_HPP
 #define COUNTINGSORT_HPP
 
