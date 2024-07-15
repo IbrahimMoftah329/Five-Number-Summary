@@ -1,9 +1,3 @@
-/*
-CSCI335 Spring 2024
-Project 3
-Ibrahim Moftah
-*/
-
 #ifndef COUNTINGSORT_HPP
 #define COUNTINGSORT_HPP
 
