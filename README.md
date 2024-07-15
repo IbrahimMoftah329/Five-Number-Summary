@@ -1,4 +1,4 @@
-Project 3: Five-Number Summary Calculation and Benchmarking
+Project: Five-Number Summary Calculation and Benchmarking
 
 Objective
 
