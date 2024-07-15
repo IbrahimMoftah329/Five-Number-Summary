@@ -1,3 +1,7 @@
+/*
+Author: Ibrahim Moftah
+*/
+
 #include "QuickSelect1.hpp"
 
 // Function to perform the Quickselect algorithm
