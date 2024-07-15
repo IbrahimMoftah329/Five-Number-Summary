@@ -1,9 +1,3 @@
-/*
-CSCI335 Spring 2024
-Project 3
-Ibrahim Moftah
-*/
-
 #include "QuickSelect1.hpp"
 
 // Function to perform the Quickselect algorithm
